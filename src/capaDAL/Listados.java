@@ -13,7 +13,6 @@ public class Listados {
 	 * @return
 	 */
 	public Vector<Boleto> listaBoletos(){
-		Boleto generico=new Boleto();
 		Vector<Boleto> devolver=new Vector<Boleto>();
 		DbConnexion miConn=new DbConnexion();
 		Statement instruccion;
@@ -31,6 +30,11 @@ public class Listados {
 			instruccion=miConn.getConexionBasedeDatos().createStatement();
 			resultado=instruccion.executeQuery(selectLista);
 			while(resultado.next()){
+				//Necesario aquí porque sino el vector se queda con los datos
+				//del último boleto añadido
+				
+				//Intentar cambiar
+				Boleto generico=new Boleto();
 				generico.setIdSorteo(resultado.getLong(boletos[0].toString()));
 				generico.setIdBoleto(resultado.getLong(boletos[1].toString()));
 				generico.setReintegro(resultado.getShort(boletos[2].toString()));

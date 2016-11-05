@@ -13,11 +13,18 @@ public class DbConnexion {
 	
 	public DbConnexion(){
 		// Intentar usar la info en conf.ini
-	      sourceURL = "jdbc:sqlserver:javidb.database.windows.net";
+	      sourceURL = "jdbc:sqlserver://primitiva.database.windows.net:1433;database=PrimitivaJavi;";
 	      usuario = "prueba";
 	      //La única contraseña que me permite azure
-	      password = "pr23ueba123.";
+	      password = "pr23ueba234.";
 	      
+		
+		
+	      //Para mi casa
+		  //Necesario activar protocolo TCP/IP!!!!!
+	      /*sourceURL="jdbc:sqlserver://localhost";
+	      usuario = "prueba";
+	      password = "123";*/
 	      
 	}
 
