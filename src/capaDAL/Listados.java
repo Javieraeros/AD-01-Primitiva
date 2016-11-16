@@ -1,5 +1,6 @@
 package capaDAL;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,7 +15,7 @@ public class Listados {
 	 */
 	public Vector<Boleto> listaBoletos(){
 		Vector<Boleto> devolver=new Vector<Boleto>();
-		DbConnexion miConn=new DbConnexion();
+		DbConnexion miConn=DbConnexion.getDbConnexion();
 		Statement instruccion;
 		ResultSet resultado;
 		
@@ -26,7 +27,6 @@ public class Listados {
 				" From "+NombresTablas.values()[0];
 		
 		try {
-			miConn.openConnection();
 			instruccion=miConn.getConexionBasedeDatos().createStatement();
 			resultado=instruccion.executeQuery(selectLista);
 			while(resultado.next()){
@@ -46,7 +46,7 @@ public class Listados {
 		} catch (SQLException e) {
 			System.out.println(e);
 		}finally{
-			miConn.closeConnection();
+			//miConn.closeConnection();
 		}
 		
 		return devolver;

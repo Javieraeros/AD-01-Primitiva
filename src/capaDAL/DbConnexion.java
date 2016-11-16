@@ -6,12 +6,13 @@ import java.sql.SQLException;
 
 public class DbConnexion {
 	
+	private static DbConnexion Instance;
 	private String sourceURL;
 	private String usuario;
 	private String password;
-	private Connection conexionBasedeDatos;
+	private  Connection conexionBasedeDatos;
 	
-	public DbConnexion(){
+	private DbConnexion(){
 		// Intentar usar la info en conf.ini
 	      sourceURL = "jdbc:sqlserver://primitiva.database.windows.net:1433;database=PrimitivaJavi;";
 	      usuario = "prueba";
@@ -27,8 +28,22 @@ public class DbConnexion {
 	      password = "123";*/
 	      
 	}
+	
+	public static DbConnexion getDbConnexion(){
+		if(Instance==null){
+			Instance=new DbConnexion();
+		}
+		return Instance;
+	}
+	
+	public static DbConnexion getDbConnexion(String sourceURL, String usuario, String password){
+		if(Instance==null){
+			Instance=new DbConnexion(sourceURL,usuario,password);
+		}
+		return Instance;
+	}
 
-	public DbConnexion(String sourceURL, String usuario, String password) {
+	private DbConnexion(String sourceURL, String usuario, String password) {
 		super();
 		this.sourceURL = sourceURL;
 		this.usuario = usuario;
@@ -37,11 +52,13 @@ public class DbConnexion {
 
 	public void openConnection() throws SQLException{
 		// Crear una connexión con el DriverManager
-	      try {
-			conexionBasedeDatos = 
-			    DriverManager.getConnection(sourceURL, usuario, password);
-		} catch (SQLException e) {
-			throw e;
+		if(conexionBasedeDatos==null){
+			try {
+				conexionBasedeDatos = 
+				    DriverManager.getConnection(sourceURL, usuario, password);
+			} catch (SQLException e) {
+				throw e;
+			}
 		}
 	}
 	
@@ -85,4 +102,5 @@ public class DbConnexion {
 	public void setConexionBasedeDatos(Connection conexionBasedeDatos) {
 		this.conexionBasedeDatos = conexionBasedeDatos;
 	}
+	
 }
