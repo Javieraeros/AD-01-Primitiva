@@ -3,6 +3,7 @@ package capaDAL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.lang.*;
 
 import modelo.Boleto;
 
@@ -12,6 +13,7 @@ public class BoletoCRUD {
 		
 		Statement instruccion;
 		ResultSet resultado;
+		String miInsert;
 		
 		try {
 			instruccion=miConexion.getConexionBasedeDatos().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
