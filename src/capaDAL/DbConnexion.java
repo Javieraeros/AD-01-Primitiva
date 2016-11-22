@@ -23,7 +23,7 @@ public class DbConnexion {
 		
 	      //Para mi casa
 		  //Necesario activar protocolo TCP/IP!!!!!
-	      /*sourceURL="jdbc:sqlserver://localhost";
+	      /*sourceURL="jdbc:sqlserver://localhost;database=PrimitivaJavi";
 	      usuario = "prueba";
 	      password = "123";*/
 	      
@@ -52,7 +52,7 @@ public class DbConnexion {
 
 	public void openConnection() throws SQLException{
 		// Crear una connexión con el DriverManager
-		if(conexionBasedeDatos==null){
+		if(conexionBasedeDatos==null || conexionBasedeDatos.isClosed()){
 			try {
 				conexionBasedeDatos = 
 				    DriverManager.getConnection(sourceURL, usuario, password);

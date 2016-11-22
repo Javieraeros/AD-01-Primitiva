@@ -27,6 +27,7 @@ public class Listados {
 				" From "+NombresTablas.values()[0];
 		
 		try {
+			miConn.openConnection();
 			instruccion=miConn.getConexionBasedeDatos().createStatement();
 			resultado=instruccion.executeQuery(selectLista);
 			while(resultado.next()){
@@ -46,7 +47,7 @@ public class Listados {
 		} catch (SQLException e) {
 			System.out.println(e);
 		}finally{
-			//miConn.closeConnection();
+			miConn.closeConnection();
 		}
 		
 		return devolver;
